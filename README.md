@@ -1,5 +1,4 @@
 # CoffeeScript Style Guide
-
 This guide presents a collection of best-practices and coding conventions for the [CoffeeScript][coffeescript] programming language.
 
 This guide is intended to be community-driven, and contributions are highly encouraged.
@@ -7,7 +6,6 @@ This guide is intended to be community-driven, and contributions are highly enco
 Please note that this is a work-in-progress: there is much more that can be specified, and some of the guidelines that have been specified may not be deemed to be idiomatic by the community (in which case, these offending guidelines will be modified or removed, as appropriate).
 
 ## Inspiration
-
 The details in this guide have been very heavily inspired by several existing style guides and other resources. In particular:
 
 - [PEP-8][pep8]: Style Guide for Python Code
@@ -19,42 +17,38 @@ The details in this guide have been very heavily inspired by several existing st
 - The [CoffeeScript FAQ][coffeescript-faq]
 
 ## Table of Contents
-
-* [The CoffeeScript Style Guide](#guide)
-    * [Code Layout](#code-layout)
-        * [Tabs or Spaces?](#tabs-or-spaces)
-        * [Maximum Line Length](#maximum-line-length)
-        * [Blank Lines](#blank-lines)
-        * [Trailing Whitespace](#trailing-whitespace)
-        * [Optional Commas](#optional-commas)
-        * [Encoding](#encoding)
-    * [Module Imports](#module-imports)
-    * [Whitespace in Expressions and Statements](#whitespace)
-    * [Comments](#comments)
-        * [Block Comments](#block-comments)
-        * [Inline Comments](#inline-comments)
-    * [Naming Conventions](#naming-conventions)
-    * [Functions](#functions)
-    * [Strings](#strings)
-    * [Conditionals](#conditionals)
-    * [Looping and Comprehensions](#looping-and-comprehensions)
-    * [Extending Native Objects](#extending-native-objects)
-    * [Exceptions](#exceptions)
-    * [Annotations](#annotations)
-    * [Miscellaneous](#miscellaneous)
+- [The CoffeeScript Style Guide](#guide)
+  - [Code Layout](#code-layout)
+    - [Tabs or Spaces?](#tabs-or-spaces)
+    - [Maximum Line Length](#maximum-line-length)
+    - [Blank Lines](#blank-lines)
+    - [Trailing Whitespace](#trailing-whitespace)
+    - [Optional Commas](#optional-commas)
+    - [Encoding](#encoding)
+  - [Module Imports](#module-imports)
+  - [Whitespace in Expressions and Statements](#whitespace)
+  - [Comments](#comments)
+    - [Block Comments](#block-comments)
+    - [Inline Comments](#inline-comments)
+  - [Naming Conventions](#naming-conventions)
+  - [Functions](#functions)
+  - [Strings](#strings)
+  - [Conditionals](#conditionals)
+  - [Looping and Comprehensions](#looping-and-comprehensions)
+  - [Extending Native Objects](#extending-native-objects)
+  - [Exceptions](#exceptions)
+  - [Annotations](#annotations)
+  - [Miscellaneous](#miscellaneous)
 
 ## Code layout
 
 ### Tabs or Spaces?
-
 Use **spaces only**, with **2 spaces** per indentation level. Never mix tabs and spaces.
 
 ### Maximum Line Length
-
 Limit all lines to a maximum of 79 characters.
 
 ### Blank Lines
-
 Separate top-level function and class definitions with a single blank line.
 
 Separate method definitions inside of a class with a single blank line.
@@ -62,11 +56,9 @@ Separate method definitions inside of a class with a single blank line.
 Use a single blank line within the bodies of methods or functions in cases where this improves readability (e.g., for the purpose of delineating logical sections).
 
 ### Trailing Whitespace
-
 Do not include trailing whitespace on any lines.
 
 ### Optional Commas
-
 Avoid the use of commas before newlines when properties or elements of an Object or Array are listed on separate lines.
 
 ```coffeescript
@@ -92,11 +84,9 @@ bar:
 ```
 
 ### Encoding
-
 UTF-8 is the preferred source file encoding.
 
 ## Module Imports
-
 If using a module system (CommonJS Modules, AMD, etc.), `require` statements should be placed on separate lines.
 
 ```coffeescript
@@ -110,56 +100,52 @@ These statements should be grouped in the following order:
 3. Local imports _(imports specific to this application or library)_
 
 ## Whitespace in Expressions and Statements
-
 Avoid extraneous whitespace in the following situations:
 
 - Immediately inside parentheses, brackets or braces
 
-    ```coffeescript
-       ($ 'body') # Yes
-       ( $ 'body' ) # No
-    ```
+```coffeescript
+($ 'body') # Yes
+( $ 'body' ) # No
+```
 
 - Immediately before a comma
 
-    ```coffeescript
-       console.log x, y # Yes
-       console.log x , y # No
-    ```
+```coffeescript
+console.log x, y # Yes
+console.log x , y # No
+```
 
 Additional recommendations:
 
 - Always surround these binary operators with a **single space** on either side
+  - assignment: `=`
+  - augmented assignment: `+=`, `-=`, etc.
+  - comparisons: `==`, `<`, `>`, `<=`, `>=`, `unless`, etc.
+  - arithmetic operators: `+`, `-`, `*`, `/`, etc.
 
-    - assignment: `=`
+- _Note that this also applies when indicating default parameter value(s) in a function declaration_
 
-        - _Note that this also applies when indicating default parameter value(s) in a function declaration_
+  ```coffeescript
+  test: (param = null) -> # Yes
+  test: (param=null) -> # No
+  ```
 
-           ```coffeescript
-           test: (param = null) -> # Yes
-           test: (param=null) -> # No
-           ```
+- _(Do not use more than one space around these operators)_
 
-    - augmented assignment: `+=`, `-=`, etc.
-    - comparisons: `==`, `<`, `>`, `<=`, `>=`, `unless`, etc.
-    - arithmetic operators: `+`, `-`, `*`, `/`, etc.
+  ```coffeescript
+  # Yes
+  x = 1
+  y = 1
+  fooBar = 3
 
-    - _(Do not use more than one space around these operators)_
-
-        ```coffeescript
-           # Yes
-           x = 1
-           y = 1
-           fooBar = 3
-
-           # No
-           x      = 1
-           y      = 1
-           fooBar = 3
-        ```
+  # No
+  x      = 1
+  y      = 1
+  fooBar = 3
+  ```
 
 ## Comments
-
 If modifying code that is described by an existing comment, update the comment such that it accurately reflects the new code. (Ideally, improve the code to obviate the need for the comment, and delete the comment entirely.)
 
 The first word of the comment should be capitalized, unless the first word is an identifier that begins with a lower-case letter.
@@ -167,7 +153,6 @@ The first word of the comment should be capitalized, unless the first word is an
 If a comment is short, the period at the end can be omitted.
 
 ### Block Comments
-
 Block comments apply to the block of code that follows them.
 
 Each line of a block comment starts with a `#` and a single space, and should be indented at the same level of the code that it describes.
@@ -175,20 +160,19 @@ Each line of a block comment starts with a `#` and a single space, and should be
 Paragraphs inside of block comments are separated by a line containing a single `#`.
 
 ```coffeescript
-  # This is a block comment. Note that if this were a real block
-  # comment, we would actually be describing the proceeding code.
-  #
-  # This is the second paragraph of the same block comment. Note
-  # that this paragraph was separated from the previous paragraph
-  # by a line containing a single comment character.
+# This is a block comment. Note that if this were a real block
+# comment, we would actually be describing the proceeding code.
+#
+# This is the second paragraph of the same block comment. Note
+# that this paragraph was separated from the previous paragraph
+# by a line containing a single comment character.
 
-  init()
-  start()
-  stop()
+init()
+start()
+stop()
 ```
 
 ### Inline Comments
-
 Inline comments are placed on the line immediately above the statement that they are describing. If the inline comment is sufficiently short, it can be placed on the same line as the statement (separated by a single space from the end of the statement).
 
 All inline comments should start with a `#` and a single space.
@@ -198,19 +182,18 @@ The use of inline comments should be limited, because their existence is typical
 Do not use inline comments when they state the obvious:
 
 ```coffeescript
-  # No
-  x = x + 1 # Increment x
+# No
+x = x + 1 # Increment x
 ```
 
 However, inline comments can be useful in certain scenarios:
 
 ```coffeescript
-  # Yes
-  x = x + 1 # Compensate for border
+# Yes
+x = x + 1 # Compensate for border
 ```
 
 ## Naming Conventions
-
 Use `camelCase` (with a leading lowercase character) to name all variables, methods, and object properties.
 
 Use `CamelCase` (with a leading uppercase character) to name all classes. _(This style is also commonly referred to as `PascalCase`, `CamelCaps`, or `CapWords`, among [other alternatives][camel-case-variations].)_
@@ -230,7 +213,6 @@ _privateMethod: ->
 ```
 
 ## Functions
-
 _(These guidelines also apply to the methods of a class.)_
 
 When declaring a function that takes arguments, always use a single space after the closing parenthesis of the arguments list:
@@ -299,7 +281,6 @@ In cases where method calls are being chained, some adopters of this style prefe
 The function grouping style is not recommended. However, **if the function grouping style is adopted for a particular project, be consistent with its usage.**
 
 ## Strings
-
 Use string interpolation instead of string concatenation:
 
 ```coffeescript
@@ -310,51 +291,49 @@ Use string interpolation instead of string concatenation:
 Prefer single quoted strings (`''`) instead of double quoted (`""`) strings, unless features like string interpolation are being used for the given string.
 
 ## Conditionals
-
 Favor `unless` over `if` for negative conditions.
 
 Instead of using `unless...else`, use `if...else`:
 
 ```coffeescript
-  # Yes
-  if true
-    ...
-  else
-    ...
+# Yes
+if true
+  ...
+else
+  ...
 
-  # No
-  unless false
-    ...
-  else
-    ...
+# No
+unless false
+  ...
+else
+  ...
 ```
 
 Multi-line if/else clauses should use indentation:
 
 ```coffeescript
-  # Yes
-  if true
-    ...
-  else
-    ...
+# Yes
+if true
+  ...
+else
+  ...
 
-  # No
-  if true then ...
-  else ...
+# No
+if true then ...
+else ...
 ```
 
 ## Looping and Comprehensions
-
 Take advantage of comprehensions whenever possible:
 
 ```coffeescript
-  # Yes
-  result = (item.name for item in array)
+# Yes
+result = (item.name for item in array)
 
-  # No
-  results = []
-  for item in array
-    results.push item.name
+# No
+results = []
+for item in array
+  results.push item.name
 ```
 
 To filter:
@@ -371,17 +350,14 @@ alert("#{key} = #{value}") for key, value of object
 ```
 
 ## Extending Native Objects
-
 Do not modify native objects.
 
 For example, do not modify `Array.prototype` to introduce `Array#forEach`.
 
 ## Exceptions
-
 Do not suppress exceptions.
 
 ## Annotations
-
 Use annotations when necessary to describe a specific action that must be taken against the indicated block of code.
 
 Write the annotation on the line immediately above the code that the annotation is describing.
@@ -389,17 +365,17 @@ Write the annotation on the line immediately above the code that the annotation 
 The annotation keyword should be followed by a colon and a space, and a descriptive note.
 
 ```coffeescript
-  # FIXME: The client's current state should *not* affect payload processing.
-  resetClientState()
-  processPayload()
+# FIXME: The client's current state should *not* affect payload processing.
+resetClientState()
+processPayload()
 ```
 
 If multiple lines are required by the description, indent subsequent lines with two spaces:
 
 ```coffeescript
-  # TODO: Ensure that the value returned by this call falls within a certain
-  #   range, or throw an exception.
-  analyze()
+# TODO: Ensure that the value returned by this call falls within a certain
+#   range, or throw an exception.
+analyze()
 ```
 
 Annotation types:
@@ -413,7 +389,6 @@ Annotation types:
 If a custom annotation is required, the annotation should be documented in the project's README.
 
 ## Miscellaneous
-
 `and` is preferred over `&&`.
 
 `or` is preferred over `||`.
